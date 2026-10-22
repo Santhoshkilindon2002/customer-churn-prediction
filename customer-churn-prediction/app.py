@@ -24,6 +24,8 @@ def load_artifacts():
     )
     return preprocessor, model
 
+preprocessor, model = load_artifacts()
+
 # Header
 st.title("📊 Customer Churn Prediction")
 st.write(
