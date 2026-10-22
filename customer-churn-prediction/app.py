@@ -2,6 +2,7 @@
 import joblib
 import pandas as pd
 import streamlit as st
+from pathlib import Path
 
 # Page configuration
 st.set_page_config(
@@ -11,12 +12,19 @@ st.set_page_config(
 )
 
 # Load saved files
+BASE_DIR = Path(__file__).resolve().parent
+
 @st.cache_resource
 def load_artifacts():
-    preprocessor = joblib.load("data/processed/preprocessor.joblib")
-    model = joblib.load("models/best_model.joblib")
-    return preprocessor, model
+    preprocessor_path = (
+        BASE_DIR / "data" / "processed" / "preprocessor.joblib"
+    )
+    model_path = BASE_DIR / "models" / "best_model.joblib"
 
+    preprocessor = joblib.load(preprocessor_path)
+    model = joblib.load(model_path)
+
+    return preprocessor, model
 preprocessor, model = load_artifacts()
 
 # Header
