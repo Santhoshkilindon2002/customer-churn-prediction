@@ -16,16 +16,13 @@ BASE_DIR = Path(__file__).resolve().parent
 
 @st.cache_resource
 def load_artifacts():
-    preprocessor_path = (
+    preprocessor = joblib.load(
         BASE_DIR / "data" / "processed" / "preprocessor.joblib"
     )
-    model_path = BASE_DIR / "models" / "best_model.joblib"
-
-    preprocessor = joblib.load(preprocessor_path)
-    model = joblib.load(model_path)
-
+    model = joblib.load(
+        BASE_DIR / "models" / "best_model.joblib"
+    )
     return preprocessor, model
-preprocessor, model = load_artifacts()
 
 # Header
 st.title("📊 Customer Churn Prediction")
